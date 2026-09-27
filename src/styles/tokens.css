@@ -1,0 +1,87 @@
+/* SAGEQUEST design tokens — editorial, professional, restrained. */
+
+:root {
+  /* Base neutrals — dark mode default */
+  --sq-bg: #0B0D0F;
+  --sq-bg-raised: #131619;
+  --sq-bg-inset: #0E1012;
+  --sq-border: #24282D;
+  --sq-border-strong: #34393F;
+
+  --sq-text: #EDEEF0;
+  --sq-text-muted: #9BA1A8;
+  --sq-text-faint: #6B7177;
+
+  /* Accent — single distinctive color: signal amber */
+  --sq-accent: #E8A33D;
+  --sq-accent-strong: #F5B85A;
+  --sq-accent-text: #1A1200;
+
+  /* Semantic */
+  --sq-success: #4CAF7D;
+  --sq-warning: #E0A93D;
+  --sq-error: #E0645C;
+  --sq-muted: #5A6067;
+
+  /* Rank colors (progression only, not decorative) */
+  --sq-rank-rookie: #6B7177;
+  --sq-rank-explorer: #6FA8DC;
+  --sq-rank-speaker: #4CAF7D;
+  --sq-rank-operator: #E8A33D;
+  --sq-rank-professional: #D98A3D;
+  --sq-rank-expert: #C76B6B;
+  --sq-rank-master: #B98BD9;
+
+  --sq-radius-sm: 3px;
+  --sq-radius-md: 6px;
+  --sq-radius-lg: 10px;
+
+  --sq-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sq-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --sq-bg: #FAFAF8;
+  --sq-bg-raised: #FFFFFF;
+  --sq-bg-inset: #F2F1EE;
+  --sq-border: #E3E1DB;
+  --sq-border-strong: #CFCCC3;
+
+  --sq-text: #17181A;
+  --sq-text-muted: #5C6066;
+  --sq-text-faint: #8A8E93;
+
+  --sq-accent: #B97A1E;
+  --sq-accent-strong: #9C6819;
+  --sq-accent-text: #FFFFFF;
+
+  --sq-success: #2F8557;
+  --sq-warning: #B97A1E;
+  --sq-error: #C1453D;
+  --sq-muted: #8A8E93;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --sq-bg: #FAFAF8;
+    --sq-bg-raised: #FFFFFF;
+    --sq-bg-inset: #F2F1EE;
+    --sq-border: #E3E1DB;
+    --sq-border-strong: #CFCCC3;
+    --sq-text: #17181A;
+    --sq-text-muted: #5C6066;
+    --sq-text-faint: #8A8E93;
+    --sq-accent: #B97A1E;
+    --sq-accent-strong: #9C6819;
+    --sq-accent-text: #FFFFFF;
+    --sq-success: #2F8557;
+    --sq-warning: #B97A1E;
+    --sq-error: #C1453D;
+    --sq-muted: #8A8E93;
+    color-scheme: light;
+  }
+}

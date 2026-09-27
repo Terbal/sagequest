@@ -1,0 +1,58 @@
+import type { UsageNote } from '../core/types'
+
+export const week1UsageNotes: UsageNote[] = [
+  {
+    id: 'un-a-an',
+    title: '"a" vs "an"',
+    cefr: 'A1.1',
+    relatedGrammar: ['articles'],
+    explanation: 'Use "an" before a vowel SOUND, not just a vowel letter. "an hour" (silent h) but "a university" (sounds like "yoo").',
+    examplesGood: ['an engineer', 'an hour', 'a university', 'a car'],
+    examplesBad: ['a engineer', 'a hour', 'an university'],
+  },
+  {
+    id: 'un-am-is-are',
+    title: '"am" vs "is" vs "are"',
+    cefr: 'A1.1',
+    relatedGrammar: ['be', 'pronouns'],
+    explanation: '"am" only ever follows "I". "is" follows he/she/it or a singular noun. "are" follows you/we/they or a plural noun. Never mix them.',
+    examplesGood: ['I am ready.', 'She is ready.', 'They are ready.'],
+    examplesBad: ['I is ready.', 'She are ready.', 'They is ready.'],
+  },
+  {
+    id: 'un-do-does',
+    title: '"do" vs "does" in questions',
+    cefr: 'A1.2',
+    relatedGrammar: ['basic_questions', 'present_simple_basic'],
+    explanation: 'Use "does" with he/she/it — and when you use "does", the main verb loses its "-s": "Does she work here?", not "Does she works here?".',
+    examplesGood: ['Do you work here?', 'Does she work here?'],
+    examplesBad: ['Does she works here?', 'Do she work here?'],
+  },
+  {
+    id: 'un-there-is-are',
+    title: '"there is" vs "there are"',
+    cefr: 'A1.1',
+    relatedGrammar: ['there_is_are'],
+    explanation: 'Match "there is/are" to what comes right after it, not to the topic of the sentence. "There are three chairs and a table" — plural wins if the first noun after it is plural.',
+    examplesGood: ['There is a table.', 'There are three chairs.'],
+    examplesBad: ['There is three chairs.'],
+  },
+  {
+    id: 'un-negative-verb',
+    title: "\"don't/doesn't\" vs \"am not/isn't/aren't\"",
+    cefr: 'A1.1',
+    relatedGrammar: ['basic_negatives'],
+    explanation: 'Action verbs (work, like, live) need "don\'t/doesn\'t". The verb "be" never uses "don\'t" — it negates directly: "I am not", "she isn\'t", never "I don\'t am" or "she don\'t like".',
+    examplesGood: ["I don't work on Sundays.", "She isn't ready.", "I'm not sure."],
+    examplesBad: ["I don't am ready.", "She don't like coffee."],
+  },
+  {
+    id: 'un-possessive-vs-subject',
+    title: '"her" vs "she"',
+    cefr: 'A1.1',
+    relatedGrammar: ['possessives', 'pronouns'],
+    explanation: '"She" is the subject doing the action. "Her" shows possession or is the object. A common slip: using "she" as a possessive.',
+    examplesGood: ["She is a doctor.", "Her name is Anna.", "I called her."],
+    examplesBad: ['She name is Anna.'],
+  },
+]

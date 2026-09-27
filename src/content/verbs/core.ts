@@ -1,0 +1,87 @@
+import type { VerbEntry } from '../../core/types'
+
+export const coreVerbs: VerbEntry[] = [
+  {
+    id: 'be', base: 'be', past: 'was/were', pastParticiple: 'been', ing: 'being',
+    meaningFr: 'être', cefr: 'A1.1', irregular: true, frequencyRank: 1,
+    collocations: ['be right', 'be ready', 'be careful'],
+    phrasalVerbs: [],
+    exampleSentences: ['I am a developer.', 'She was tired yesterday.'],
+  },
+  {
+    id: 'have', base: 'have', past: 'had', pastParticiple: 'had', ing: 'having',
+    meaningFr: 'avoir', cefr: 'A1.1', irregular: true, frequencyRank: 2,
+    collocations: ['have time', 'have a look', 'have breakfast'],
+    phrasalVerbs: [{ form: 'have on', meaningFr: 'porter (un vêtement)' }],
+    exampleSentences: ['I have two children.', 'We had a great day.'],
+  },
+  {
+    id: 'work', base: 'work', past: 'worked', pastParticiple: 'worked', ing: 'working',
+    meaningFr: 'travailler', cefr: 'A1.1', irregular: false, frequencyRank: 10,
+    collocations: ['work hard', 'work from home', 'work overtime'],
+    phrasalVerbs: [{ form: 'work out', meaningFr: 'faire du sport / résoudre' }],
+    exampleSentences: ['I work in IT.', 'She worked late last night.'],
+  },
+  {
+    id: 'live', base: 'live', past: 'lived', pastParticiple: 'lived', ing: 'living',
+    meaningFr: 'vivre / habiter', cefr: 'A1.1', irregular: false, frequencyRank: 25,
+    collocations: ['live nearby', 'live alone'],
+    phrasalVerbs: [],
+    exampleSentences: ['I live in Kinshasa.', 'They lived in Paris for a year.'],
+  },
+  {
+    id: 'like', base: 'like', past: 'liked', pastParticiple: 'liked', ing: 'liking',
+    meaningFr: 'aimer', cefr: 'A1.1', irregular: false, frequencyRank: 15,
+    collocations: ['really like', "don't like"],
+    phrasalVerbs: [],
+    exampleSentences: ['I like coffee.', 'He liked the movie.'],
+  },
+  {
+    id: 'go', base: 'go', past: 'went', pastParticiple: 'gone', ing: 'going',
+    meaningFr: 'aller', cefr: 'A1.2', irregular: true, frequencyRank: 5,
+    collocations: ['go home', 'go to work', 'go shopping'],
+    phrasalVerbs: [{ form: 'go on', meaningFr: 'continuer' }, { form: 'go over', meaningFr: 'examiner' }],
+    exampleSentences: ['I go to work by bus.', 'Yesterday, I went to the office.'],
+    commonMistakes: ["Using 'go' instead of 'went' after a past time marker like 'yesterday'."],
+  },
+  {
+    id: 'do', base: 'do', past: 'did', pastParticiple: 'done', ing: 'doing',
+    meaningFr: 'faire', cefr: 'A1.2', irregular: true, frequencyRank: 6,
+    collocations: ['do a favor', 'do homework', 'do business'],
+    phrasalVerbs: [{ form: 'do over', meaningFr: 'refaire' }],
+    exampleSentences: ['What do you do?', 'She did the report yesterday.'],
+  },
+  {
+    id: 'take', base: 'take', past: 'took', pastParticiple: 'taken', ing: 'taking',
+    meaningFr: 'prendre', cefr: 'A2.1', irregular: true, frequencyRank: 20,
+    collocations: ['take a break', 'take a look', 'take responsibility', 'take care', 'take part'],
+    phrasalVerbs: [
+      { form: 'take off', meaningFr: 'décoller / enlever' },
+      { form: 'take over', meaningFr: 'prendre le relais' },
+      { form: 'take up', meaningFr: 'commencer (une activité)' },
+      { form: 'take out', meaningFr: 'sortir / emporter' },
+    ],
+    exampleSentences: ['Take a break.', 'She took the last train.'],
+  },
+  {
+    id: 'see', base: 'see', past: 'saw', pastParticiple: 'seen', ing: 'seeing',
+    meaningFr: 'voir', cefr: 'A2.1', irregular: true, frequencyRank: 18,
+    collocations: ['see you later', 'see a doctor'],
+    phrasalVerbs: [{ form: 'see off', meaningFr: 'dire au revoir à' }],
+    exampleSentences: ['I see what you mean.', 'I saw him yesterday.'],
+  },
+  {
+    id: 'give', base: 'give', past: 'gave', pastParticiple: 'given', ing: 'giving',
+    meaningFr: 'donner', cefr: 'A2.1', irregular: true, frequencyRank: 30,
+    collocations: ['give a presentation', 'give advice'],
+    phrasalVerbs: [{ form: 'give up', meaningFr: 'abandonner' }],
+    exampleSentences: ['Can you give me a hand?', 'He gave a great presentation.'],
+  },
+  {
+    id: 'write', base: 'write', past: 'wrote', pastParticiple: 'written', ing: 'writing',
+    meaningFr: 'écrire', cefr: 'A2.1', irregular: true, frequencyRank: 45,
+    collocations: ['write a report', 'write down'],
+    phrasalVerbs: [],
+    exampleSentences: ['I write emails every day.', 'She wrote the report last night.'],
+  },
+]

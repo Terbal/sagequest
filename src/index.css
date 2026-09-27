@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@theme {
+  --font-sans: var(--sq-font-sans);
+  --font-mono: var(--sq-font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  background: var(--sq-bg);
+  color: var(--sq-text);
+  font-family: var(--sq-font-sans);
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+::selection {
+  background: var(--sq-accent);
+  color: var(--sq-accent-text);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Scrollbars — thin, unobtrusive */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--sq-border-strong); border-radius: 4px; }
+
+.sq-panel {
+  background: var(--sq-bg-raised);
+  border: 1px solid var(--sq-border);
+  border-radius: var(--sq-radius-md);
+}
+
+.sq-mono {
+  font-family: var(--sq-font-mono);
+  letter-spacing: 0.02em;
+}

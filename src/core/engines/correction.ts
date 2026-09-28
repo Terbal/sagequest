@@ -33,6 +33,7 @@ export interface CheckResult {
 
 function normalize(text: string): string {
   return text
+    .replace(/[\u2018\u2019]/g, "'") // typographic apostrophes (mobile keyboards) -> straight
     .toLowerCase()
     .trim()
     .replace(/[.,!?;:]/g, '')
@@ -124,11 +125,22 @@ export function checkAnswer(
     for (const answer of acceptableAnswers) {
       best = Math.max(best, tokenSimilarityPercent(userText, answer))
     }
+    // Word-level similarity alone is too forgiving on short sentences: one
+    // wrong verb form in a 5-word sentence is still 80% similar. So the
+    // exercise's expectedPatterns act as REQUIRED grammar keywords: if any is
+    // missing, the score is capped just below the pass mark.
+    const matchedKeys: string[] = []
+    const failedKeys: string[] = []
+    for (const p of expectedPatterns) {
+      if (evalPattern(p, normalized)) matchedKeys.push(p)
+      else failedKeys.push(p)
+    }
+    const score = failedKeys.length > 0 ? Math.min(best, MATCH_THRESHOLD - 1) : best
     return {
-      score: best,
-      correct: best >= MATCH_THRESHOLD,
-      matchedPatterns: [],
-      failedPatterns: [],
+      score,
+      correct: score >= MATCH_THRESHOLD,
+      matchedPatterns: matchedKeys,
+      failedPatterns: failedKeys,
       detectedMistake,
       method: 'structured',
     }
@@ -166,7 +178,9 @@ export function buildCorrectionDisplay(
     wrong: userText,
     right: fallbackCorrect ?? userText,
     why: check.method === 'structured'
-      ? 'Word order or word choice differs from the expected structure.'
+      ? (check.failedPatterns.length > 0
+          ? 'A key word of the target structure is missing or in the wrong form.'
+          : 'Word order or word choice differs from the expected structure.')
       : 'Check the target grammar structure for this exercise and try to match it.',
   }
 }

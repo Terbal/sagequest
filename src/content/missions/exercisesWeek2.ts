@@ -54,7 +54,7 @@ export const week2Exercises: Exercise[] = [
   {
     id: 'd9-ex3', type: 'transformation', grammar: ['frequency_adverbs'], cefr: 'A1.2',
     prompt: 'Add "usually": I wake up at six.',
-    expectedPatterns: ['word:usually'],
+    expectedPatterns: ['word:usually', 'word:wake'],
     acceptableAnswers: ['i usually wake up at six', 'i usually wake up at 6'],
   },
   {
@@ -85,7 +85,7 @@ export const week2Exercises: Exercise[] = [
   {
     id: 'd10-ex3', type: 'transformation', grammar: ['present_simple_questions'], cefr: 'A1.2',
     prompt: 'Make it a question: You work in IT.',
-    expectedPatterns: ['word:do'], acceptableAnswers: ['do you work in it'],
+    expectedPatterns: ['word:do', 'word:work'], acceptableAnswers: ['do you work in it'],
   },
   {
     id: 'd10-reflex1', type: 'reflex', grammar: ['present_simple_questions'], cefr: 'A1.2',
@@ -145,7 +145,7 @@ export const week2Exercises: Exercise[] = [
   {
     id: 'd12-ex3', type: 'transformation', grammar: ['prepositions_place', 'be'], cefr: 'A1.2',
     prompt: 'Build a sentence with: the keys / on / the table',
-    expectedPatterns: ['word:on'], acceptableAnswers: ['the keys are on the table'],
+    expectedPatterns: ['word:on', 'word:are'], acceptableAnswers: ['the keys are on the table'],
   },
   {
     id: 'd12-reflex1', type: 'reflex', grammar: ['prepositions_place'], cefr: 'A1.2',

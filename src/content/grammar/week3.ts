@@ -1,0 +1,88 @@
+import type { GrammarConcept } from '../../core/types'
+
+export const week3Grammar: GrammarConcept[] = [
+  {
+    id: 'past_simple_be',
+    label: 'Past of "be": was / were',
+    cefr: 'A2.1',
+    explanation: '"was" goes with I / he / she / it. "were" goes with you / we / they. Questions and negatives need no "did": "Were you late?", "I wasn\'t ready".',
+    examples: ['I was tired yesterday.', 'They were at the office.', 'Was she at home?', "We weren't ready."],
+    commonMistakes: [
+      { wrong: 'i were tired', right: 'i was tired', why: '"were" is only for you/we/they. Use "was" with I.' },
+      { wrong: 'they was late', right: 'they were late', why: 'Plural subjects take "were".' },
+    ],
+    triggerWords: ['yesterday', 'last night', 'ago'],
+    prerequisites: ['be'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'past_time_expressions',
+    label: 'Past Time Expressions',
+    cefr: 'A2.1',
+    explanation: 'yesterday, last night/week/year, two days ago, in 2020, this morning (when it is over). They tell us WHEN a finished action happened and signal the past simple.',
+    examples: ['I saw him yesterday.', 'She left two days ago.', 'We met last week.'],
+    commonMistakes: [
+      { wrong: 'i went there since two days', right: 'i went there two days ago', why: 'Use "ago" after the time period for a finished action.' },
+    ],
+    triggerWords: ['yesterday', 'ago', 'last week', 'last night'],
+    prerequisites: [],
+    masteryThreshold: 65,
+  },
+  {
+    id: 'past_simple_regular',
+    label: 'Past Simple: regular verbs (-ed)',
+    cefr: 'A2.1',
+    explanation: 'Add -ed to the base verb for every subject: worked, watched, visited. Watch the spelling: like → liked, study → studied, stop → stopped.',
+    examples: ['I worked yesterday.', 'She studied English.', 'They visited Paris last year.'],
+    commonMistakes: [
+      { wrong: 'i work yesterday', right: 'i worked yesterday', why: '"Yesterday" is finished time: put the verb in the past (-ed).' },
+      { wrong: 'she studyed', right: 'she studied', why: 'Consonant + y becomes -ied.' },
+    ],
+    triggerWords: ['yesterday', 'last week', 'ago'],
+    prerequisites: ['present_simple_basic', 'past_time_expressions'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'past_simple_irregular',
+    label: 'Past Simple: irregular verbs',
+    cefr: 'A2.1',
+    explanation: 'Common verbs have their own past form and there is no rule: go → went, see → saw, take → took, have → had. You have to learn them, and use them in sentences until they come automatically.',
+    examples: ['Yesterday, I went to the office.', 'She saw a great film.', 'He took the bus.'],
+    commonMistakes: [
+      { wrong: 'i goed', right: 'i went', why: '"go" is irregular: the past is "went", never "goed".' },
+      { wrong: 'yesterday i go', right: 'yesterday i went', why: '"Yesterday" needs the past form.' },
+      { wrong: 'i taked', right: 'i took', why: '"take" is irregular: took.' },
+    ],
+    triggerWords: ['yesterday', 'last night', 'ago'],
+    prerequisites: ['past_simple_regular'],
+    masteryThreshold: 75,
+  },
+  {
+    id: 'past_simple_negatives',
+    label: 'Past Simple: negatives (didn\'t)',
+    cefr: 'A2.1',
+    explanation: 'Use "didn\'t" (did not) + the BASE verb, for every subject. The past marking moves to "did", so the main verb goes back to its base form.',
+    examples: ["I didn't go to work.", "She didn't see the message.", "They didn't call."],
+    commonMistakes: [
+      { wrong: "i didn't went", right: "i didn't go", why: 'After "didn\'t", use the base verb: the past is already in "did".' },
+      { wrong: 'i not went', right: "i didn't go", why: 'Negatives in the past simple use didn\'t + base verb.' },
+    ],
+    triggerWords: ['yesterday', 'last night'],
+    prerequisites: ['past_simple_regular', 'basic_negatives'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'past_simple_questions',
+    label: 'Past Simple: questions (did)',
+    cefr: 'A2.1',
+    explanation: 'Start with "Did" + subject + BASE verb: "Did you go?". With a question word: "What did you do?". Again, the main verb stays in its base form.',
+    examples: ['Did you go to work?', 'What did you do yesterday?', 'Where did she live?'],
+    commonMistakes: [
+      { wrong: 'did you went', right: 'did you go', why: 'After "did", the verb is in the base form.' },
+      { wrong: 'you went to work?', right: 'did you go to work?', why: 'Start the question with "Did".' },
+    ],
+    triggerWords: [],
+    prerequisites: ['past_simple_regular', 'present_simple_questions'],
+    masteryThreshold: 70,
+  },
+]

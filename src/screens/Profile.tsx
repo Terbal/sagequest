@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useAppStore } from '../lib/store'
 import { RANK_ORDER, RANK_XP_THRESHOLDS } from '../core/types'
 import { xpToNextRank } from '../core/engines/xp'
+import { usePwaInstall, promptInstall, isStandalone, isIOS, isSecureContextForPwa } from '../lib/pwaInstall'
 
 export default function Profile() {
   const profile = useAppStore((s) => s.profile)
@@ -9,6 +10,8 @@ export default function Profile() {
   const setSpeechRate = useAppStore((s) => s.setSpeechRate)
   const resetAll = useAppStore((s) => s.resetAll)
   const [confirmReset, setConfirmReset] = useState(false)
+  const { canPrompt, justInstalled } = usePwaInstall()
+  const [installMsg, setInstallMsg] = useState<string | null>(null)
 
   if (!profile) return null
 
@@ -107,6 +110,50 @@ export default function Profile() {
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="sq-panel p-6 mb-6">
+        <div className="text-xs font-semibold mb-3" style={{ color: 'var(--sq-text-faint)' }}>INSTALL THE APP</div>
+        {isStandalone() || justInstalled ? (
+          <p className="text-sm" style={{ color: 'var(--sq-success)' }}>✓ SAGEQUEST is installed on this device.</p>
+        ) : canPrompt ? (
+          <div>
+            <p className="text-xs mb-3" style={{ color: 'var(--sq-text-muted)' }}>
+              Install SAGEQUEST to open it like a normal app, full screen, and use it offline.
+            </p>
+            <button
+              onClick={async () => {
+                const r = await promptInstall()
+                if (r === 'dismissed') setInstallMsg('Install cancelled. You can try again any time.')
+              }}
+              className="px-5 py-2.5 text-sm font-semibold rounded-[var(--sq-radius-sm)]"
+              style={{ background: 'var(--sq-accent)', color: 'var(--sq-accent-text)' }}
+            >
+              INSTALL SAGEQUEST
+            </button>
+            {installMsg && <p className="text-xs mt-3" style={{ color: 'var(--sq-text-faint)' }}>{installMsg}</p>}
+          </div>
+        ) : isIOS() ? (
+          <p className="text-xs leading-relaxed" style={{ color: 'var(--sq-text-muted)' }}>
+            On iPhone/iPad, installing is manual and only works from <strong>Safari</strong>: tap the Share button,
+            then <strong>Add to Home Screen</strong>.
+          </p>
+        ) : (
+          <div className="text-xs leading-relaxed space-y-2" style={{ color: 'var(--sq-text-muted)' }}>
+            <p>The browser is not offering installation right now. Common reasons:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>
+                {isSecureContextForPwa()
+                  ? 'Secure connection: OK.'
+                  : 'This page is not served over HTTPS. Installation only works on https:// or on localhost — not on http://192.168.x.x.'}
+              </li>
+              <li>You are running <code>npm run dev</code>. The service worker only exists in a production build: use <code>npm run build</code> then <code>npm run preview</code>, or the deployed site.</li>
+              <li>Browser: use Chrome, Edge or Samsung Internet. Firefox desktop cannot install web apps.</li>
+              <li>On Chrome Android, also try the ⋮ menu → <strong>Install app</strong> (or <strong>Add to Home screen</strong>).</li>
+              <li>The app may already be installed — look for it in your app list.</li>
+            </ul>
+          </div>
+        )}
       </div>
 
       <div className="sq-panel p-6">

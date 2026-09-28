@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { mergeSpeechSegments } from '../lib/speech'
 
 interface SpeechRecorderProps {
   onResult: (text: string, durationMs: number) => void
@@ -6,53 +7,96 @@ interface SpeechRecorderProps {
   timeLimitSeconds?: number
 }
 
-type RecState = 'idle' | 'recording' | 'done' | 'unsupported'
+type RecState = 'idle' | 'recording' | 'stopping'
 
-// Minimal ambient typing for the Web Speech API (not in default TS lib dom).
-interface SpeechRecognitionResultLike {
-  transcript: string
-}
-
+// The audio is never stored: only the transcribed text is kept and scored.
+// On Chrome the transcription itself is done by the browser vendor's speech
+// service, so it needs an internet connection.
 export default function SpeechRecorder({ onResult, onSkip, timeLimitSeconds }: SpeechRecorderProps) {
   const [state, setState] = useState<RecState>('idle')
   const [liveText, setLiveText] = useState('')
   const [manualText, setManualText] = useState('')
   const [elapsed, setElapsed] = useState(0)
+  const [micProblem, setMicProblem] = useState<string | null>(null)
+  const [supported] = useState(() => {
+    const w = window as any
+    return Boolean(w.SpeechRecognition || w.webkitSpeechRecognition)
+  })
+
   const recognitionRef = useRef<any>(null)
   const startRef = useRef<number>(0)
   const timerRef = useRef<number | undefined>(undefined)
-  const [supported, setSupported] = useState(true)
+  const stateRef = useRef<RecState>('idle')
+  const textRef = useRef('')
+  const deliveredRef = useRef(false)
+  const onResultRef = useRef(onResult)
+
+  useEffect(() => { onResultRef.current = onResult }, [onResult])
+
+  function setBoth(next: RecState) {
+    stateRef.current = next
+    setState(next)
+  }
+
+  // Deliver the final transcript exactly once.
+  function deliver() {
+    if (deliveredRef.current) return
+    deliveredRef.current = true
+    window.clearInterval(timerRef.current)
+    setBoth('idle')
+    onResultRef.current(textRef.current.trim(), Date.now() - startRef.current)
+  }
 
   useEffect(() => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
-    if (!SpeechRecognition) {
-      setSupported(false)
-      return
-    }
-    const recognition = new SpeechRecognition()
+    if (!supported) return
+    const w = window as any
+    const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition
+    const recognition = new Ctor()
     recognition.continuous = true
     recognition.interimResults = true
     recognition.lang = 'en-US'
+
     recognition.onresult = (event: any) => {
-      let text = ''
+      const segments: string[] = []
       for (let i = 0; i < event.results.length; i++) {
-        text += (event.results[i][0] as SpeechRecognitionResultLike).transcript
+        segments.push(event.results[i][0].transcript)
       }
-      setLiveText(text)
+      const merged = mergeSpeechSegments(segments)
+      textRef.current = merged
+      setLiveText(merged)
     }
-    recognition.onerror = () => {
-      // Fail silently into manual fallback — never block the learner.
+    recognition.onerror = (e: any) => {
+      if (e?.error === 'not-allowed' || e?.error === 'service-not-allowed') {
+        setMicProblem('Microphone access was denied. Allow it in your browser settings, or type your answer instead.')
+      } else if (e?.error === 'network') {
+        setMicProblem('Speech recognition needs an internet connection on this browser. Type your answer instead.')
+      } else if (e?.error === 'audio-capture') {
+        setMicProblem('No microphone was found. Type your answer instead.')
+      }
+      // 'no-speech' / 'aborted' are normal: onend will deliver whatever we have.
+    }
+    // The engine can end on its own (silence). Treat that as "done" instead of
+    // leaving the UI stuck in "recording".
+    recognition.onend = () => {
+      if (stateRef.current !== 'idle') deliver()
     }
     recognitionRef.current = recognition
     return () => {
-      try { recognition.stop() } catch { /* noop */ }
+      window.clearInterval(timerRef.current)
+      recognition.onend = null
+      try { recognition.abort() } catch { /* noop */ }
     }
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supported])
 
   function start() {
-    setState('recording')
+    textRef.current = ''
+    deliveredRef.current = false
     setLiveText('')
+    setElapsed(0)
+    setMicProblem(null)
     startRef.current = Date.now()
+    setBoth('recording')
     timerRef.current = window.setInterval(() => setElapsed(Date.now() - startRef.current), 200)
     try {
       recognitionRef.current?.start()
@@ -60,25 +104,23 @@ export default function SpeechRecorder({ onResult, onSkip, timeLimitSeconds }: S
   }
 
   function stop() {
-    window.clearInterval(timerRef.current)
+    if (stateRef.current !== 'recording') return
+    setBoth('stopping')
     try { recognitionRef.current?.stop() } catch { /* noop */ }
-    setState('done')
-    const duration = Date.now() - startRef.current
-    onResult(liveText || manualText, duration)
+    // onend delivers the final text; this is a safety net if it never fires.
+    window.setTimeout(deliver, 1500)
   }
 
   useEffect(() => {
-    if (state === 'recording' && timeLimitSeconds && elapsed >= timeLimitSeconds * 1000) {
-      stop()
-    }
+    if (state === 'recording' && timeLimitSeconds && elapsed >= timeLimitSeconds * 1000) stop()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elapsed, state, timeLimitSeconds])
 
-  if (!supported) {
+  if (!supported || micProblem) {
     return (
       <div>
         <div className="text-xs mb-3 px-3 py-2 rounded-[var(--sq-radius-sm)]" style={{ background: 'var(--sq-bg-inset)', color: 'var(--sq-text-muted)' }}>
-          Speech recognition isn't available on this browser/device. Type your answer instead.
+          {micProblem ?? "Speech recognition isn't available on this browser/device. Type your answer instead."}
         </div>
         <textarea
           value={manualText}
@@ -89,7 +131,7 @@ export default function SpeechRecorder({ onResult, onSkip, timeLimitSeconds }: S
           placeholder="Type your answer in English..."
         />
         <button
-          onClick={() => onResult(manualText, 0)}
+          onClick={() => onResult(manualText.trim(), 0)}
           disabled={!manualText.trim()}
           className="w-full py-3 font-semibold text-sm rounded-[var(--sq-radius-sm)] disabled:opacity-40"
           style={{ background: 'var(--sq-accent)', color: 'var(--sq-accent-text)' }}
@@ -100,17 +142,19 @@ export default function SpeechRecorder({ onResult, onSkip, timeLimitSeconds }: S
     )
   }
 
+  const remaining = Math.max(0, Math.floor((timeLimitSeconds ?? 60) - elapsed / 1000))
+
   return (
     <div>
       <div
         className="min-h-[72px] px-4 py-3 mb-4 sq-panel text-sm"
         style={{ color: liveText ? 'var(--sq-text)' : 'var(--sq-text-faint)' }}
       >
-        {liveText || (state === 'recording' ? 'Listening…' : 'Press record and speak.')}
+        {liveText || (state === 'recording' ? 'Listening…' : state === 'stopping' ? 'Processing…' : 'Press record and speak.')}
       </div>
 
       <div className="flex items-center gap-3">
-        {state !== 'recording' ? (
+        {state === 'idle' ? (
           <button
             onClick={start}
             className="flex items-center gap-2 px-5 py-3 font-semibold text-sm rounded-[var(--sq-radius-sm)]"
@@ -121,10 +165,11 @@ export default function SpeechRecorder({ onResult, onSkip, timeLimitSeconds }: S
         ) : (
           <button
             onClick={stop}
-            className="flex items-center gap-2 px-5 py-3 font-semibold text-sm rounded-[var(--sq-radius-sm)]"
+            disabled={state === 'stopping'}
+            className="flex items-center gap-2 px-5 py-3 font-semibold text-sm rounded-[var(--sq-radius-sm)] disabled:opacity-60"
             style={{ background: 'var(--sq-error)', color: '#fff' }}
           >
-            <StopIcon /> STOP ({Math.max(0, Math.floor((timeLimitSeconds ?? 60) - elapsed / 1000))}s)
+            <StopIcon /> STOP ({remaining}s)
           </button>
         )}
         {onSkip && state === 'idle' && (
@@ -134,7 +179,7 @@ export default function SpeechRecorder({ onResult, onSkip, timeLimitSeconds }: S
         )}
       </div>
       <div className="text-[11px] mt-3" style={{ color: 'var(--sq-text-faint)' }}>
-        Scored on what the mic transcribed, not a pronunciation analysis.
+        Scored on what the mic transcribed, not a pronunciation analysis. Audio is not saved.
       </div>
     </div>
   )

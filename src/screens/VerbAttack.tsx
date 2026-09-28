@@ -13,9 +13,9 @@ export default function VerbAttack() {
 
   const [deck] = useState(() => [...getUnlockedVerbs(currentDay)].sort(() => Math.random() - 0.5))
   // Only drill the past simple once the learner has actually been taught it
-  // (Week 3). Before that, drill the he/she/it -s form, which Weeks 1-2 cover.
+  // (Day 17, irregular verbs). Before that, drill the he/she/it -s form, which Weeks 1-2 cover.
   const [mode] = useState<'past' | 'third'>(() =>
-    getUnlockedGrammarIds(currentDay).has('past_simple') ? 'past' : 'third'
+    getUnlockedGrammarIds(currentDay).has('past_simple_irregular') ? 'past' : 'third'
   )
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')

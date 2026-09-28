@@ -85,3 +85,46 @@ export const week2Idioms: IdiomScenario[] = [
     prompt: 'Answer a yes/no question politely with "Not really" and add a reason.',
   },
 ]
+
+export const week3Idioms: IdiomScenario[] = [
+  {
+    id: 'id-how-was',
+    situation: "It's Monday morning and you meet a colleague.",
+    expression: 'How was your weekend?',
+    meaningFr: 'Comment était ton week-end ?',
+    cefr: 'A2.1',
+    prompt: 'Ask a colleague about their weekend, then answer the same question in two sentences.',
+  },
+  {
+    id: 'id-long-time',
+    situation: "You bump into an old friend you haven't seen for years.",
+    expression: 'Long time no see!',
+    meaningFr: 'Ça fait longtemps !',
+    cefr: 'A2.1',
+    prompt: 'Greet an old friend and tell them what you did last year.',
+  },
+  {
+    id: 'id-piece-of-cake',
+    situation: 'You finished a difficult exam and a friend asks how it went.',
+    expression: 'It was a piece of cake.',
+    meaningFr: "C'était fastoche.",
+    cefr: 'A2.1',
+    prompt: 'Describe something you did recently that was very easy, using "a piece of cake".',
+  },
+  {
+    id: 'id-blast',
+    situation: 'You come back from a great party.',
+    expression: 'I had a blast.',
+    meaningFr: "Je me suis éclaté.",
+    cefr: 'A2.1',
+    prompt: 'Tell someone about an event where you had a blast: where you went and what you did.',
+  },
+  {
+    id: 'id-guess-what',
+    situation: 'You want to share surprising news.',
+    expression: 'Guess what happened!',
+    meaningFr: "Devine ce qui s'est passé !",
+    cefr: 'A2.1',
+    prompt: 'Start a short story about yesterday with "Guess what happened!".',
+  },
+]

@@ -14,7 +14,7 @@ Per the master spec's development strategy (phased build, verify after each phas
 | 8 | Placement Test | ✅ Done |
 | 9 | Boss system | ✅ Done (Day 7 boss; weekly boss pattern established) |
 | 10 | Offline/PWA | ✅ Done (service worker, manifest, IndexedDB) — not yet tested on a real device |
-| 11 | Content expansion (Days 8–90) | 🟡 Days 1–14 done (Weeks 1–2 + 2 bosses); Days 15–90 not started |
+| 11 | Content expansion (Days 8–90) | 🟡 Days 1–21 done (Weeks 1–3 + 3 bosses); Days 22–90 not started |
 | 12 | QA + polish | 🟡 Build/typecheck/lint clean; no in-browser manual QA pass yet |
 
 ## Verified this session
@@ -37,3 +37,17 @@ Per the master spec's development strategy (phased build, verify after each phas
   path should be spot-checked too
 - No automated tests yet (unit tests for the mastery/XP/spaced-repetition
   engines would be cheap and high-value — they're pure functions)
+
+## QA script
+
+`npx tsx scripts/qa.mts` checks content references, runs a model answer through every
+reflex/speaking/boss exercise (must pass), runs known-wrong answers (must fail), and tests
+the speech-transcript merge and the unlock gating. Run it after adding any content.
+
+## Installing the PWA
+
+- Needs HTTPS (or localhost). `http://192.168.x.x` will not offer installation.
+- The service worker only exists in a production build: `npm run build && npm run preview`,
+  not `npm run dev`.
+- Chrome / Edge / Samsung Internet: Profile > Install, or the browser menu > Install app.
+- iOS: Safari only, Share > Add to Home Screen.

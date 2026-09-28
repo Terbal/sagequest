@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#0B0D0F"/>
-  <rect x="16" y="16" width="480" height="480" fill="none" stroke="#E8A33D" stroke-width="4"/>
-  <text x="256" y="240" font-family="'JetBrains Mono', monospace" font-size="64" font-weight="700" fill="#EDEEF0" text-anchor="middle">SQ</text>
-  <line x1="176" y1="280" x2="336" y2="280" stroke="#E8A33D" stroke-width="6"/>
-  <text x="256" y="330" font-family="'JetBrains Mono', monospace" font-size="22" fill="#9BA1A8" text-anchor="middle" letter-spacing="2">SAGEQUEST</text>
-</svg>

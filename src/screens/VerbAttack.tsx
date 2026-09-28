@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '../lib/store'
 import { XP_TABLE } from '../core/engines/xp'
-import { getUnlockedVerbs } from '../content/helpers'
+import { getUnlockedVerbs, getUnlockedGrammarIds } from '../content/helpers'
+import { thirdPersonForm, pastAnswers } from '../core/engines/verbForms'
 
 export default function VerbAttack() {
   const navigate = useNavigate()
@@ -11,6 +12,11 @@ export default function VerbAttack() {
   const currentDay = useAppStore((s) => s.profile?.currentDay ?? 1)
 
   const [deck] = useState(() => [...getUnlockedVerbs(currentDay)].sort(() => Math.random() - 0.5))
+  // Only drill the past simple once the learner has actually been taught it
+  // (Week 3). Before that, drill the he/she/it -s form, which Weeks 1-2 cover.
+  const [mode] = useState<'past' | 'third'>(() =>
+    getUnlockedGrammarIds(currentDay).has('past_simple') ? 'past' : 'third'
+  )
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')
   const [revealed, setRevealed] = useState(false)
@@ -32,11 +38,13 @@ export default function VerbAttack() {
 
   function check() {
     const normalized = answer.trim().toLowerCase()
-    const correct = normalized === verb.past.toLowerCase() || verb.past.toLowerCase().includes(normalized)
+    const targets = mode === 'past' ? pastAnswers(verb) : [thirdPersonForm(verb.base)]
+    // Exact match only — partial answers like "wen" must not pass for "went".
+    const correct = targets.includes(normalized)
     setWasCorrect(correct)
     setRevealed(true)
     setScore((s) => ({ correct: s.correct + (correct ? 1 : 0), total: s.total + 1 }))
-    recordConceptAttempt(`verb:${verb.id}`, 'verb', correct, null, verb.id)
+    recordConceptAttempt(`verb:${verb.id}`, 'verb', correct, null, `${mode}:${verb.id}`)
     if (correct) addXP(Math.round(XP_TABLE.perfectExercise / 2), `verb-attack:${verb.id}`)
   }
 
@@ -74,7 +82,9 @@ export default function VerbAttack() {
         </div>
 
         <div className="flex-1 flex flex-col justify-center">
-          <div className="text-xs sq-mono mb-2" style={{ color: 'var(--sq-text-faint)' }}>PAST SIMPLE OF</div>
+          <div className="text-xs sq-mono mb-2" style={{ color: 'var(--sq-text-faint)' }}>
+            {mode === 'past' ? 'PAST SIMPLE OF' : 'HE / SHE / IT FORM OF'}
+          </div>
           <h1 className="text-4xl font-bold mb-8 sq-mono">{verb.base}</h1>
 
           {!revealed ? (
@@ -83,7 +93,7 @@ export default function VerbAttack() {
                 autoFocus
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
-                placeholder="Type the past form…"
+                placeholder={mode === 'past' ? 'Type the past form…' : 'Type the he/she form…'}
                 className="w-full px-4 py-3 sq-panel text-sm outline-none mb-4 sq-mono"
                 style={{ color: 'var(--sq-text)' }}
               />
@@ -105,7 +115,11 @@ export default function VerbAttack() {
                 <div className="text-sm mb-1" style={{ color: wasCorrect ? 'var(--sq-success)' : 'var(--sq-error)' }}>
                   {wasCorrect ? '✓ Correct' : `✕ You said "${answer}"`}
                 </div>
-                <div className="text-lg font-bold sq-mono">{verb.base} → {verb.past} → {verb.pastParticiple}</div>
+                <div className="text-lg font-bold sq-mono">
+                  {mode === 'past'
+                    ? `${verb.base} → ${verb.past} → ${verb.pastParticiple}`
+                    : `${verb.base} → ${thirdPersonForm(verb.base)}`}
+                </div>
                 <div className="text-xs mt-2" style={{ color: 'var(--sq-text-faint)' }}>{verb.meaningFr}</div>
                 {verb.collocations.length > 0 && (
                   <div className="text-xs mt-3" style={{ color: 'var(--sq-text-muted)' }}>

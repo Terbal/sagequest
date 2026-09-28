@@ -1,0 +1,86 @@
+import type { GrammarConcept } from '../../core/types'
+
+export const week2Grammar: GrammarConcept[] = [
+  {
+    id: 'present_simple_third_person',
+    label: 'Present Simple: he / she / it (-s)',
+    cefr: 'A1.2',
+    explanation: 'With he, she and it, the verb takes -s (works), -es after s/sh/ch/x/o (watches, goes), and -ies after consonant + y (studies).',
+    examples: ['He works in IT.', 'She watches TV.', 'It goes fast.', 'He studies English.'],
+    commonMistakes: [
+      { wrong: 'she work here', right: 'she works here', why: 'With he/she/it, add -s to the verb.' },
+      { wrong: 'he go to work', right: 'he goes to work', why: '"go" becomes "goes" (+es) with he/she/it.' },
+    ],
+    triggerWords: ['every day', 'usually'],
+    prerequisites: ['present_simple_basic'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'frequency_adverbs',
+    label: 'Frequency Adverbs',
+    cefr: 'A1.2',
+    explanation: 'always, usually, often, sometimes, never go BEFORE the main verb ("I always drink coffee") but AFTER "be" ("She is never late").',
+    examples: ['I usually wake up at six.', 'She is never late.', 'We sometimes work on Saturday.'],
+    commonMistakes: [
+      { wrong: 'i drink always coffee', right: 'i always drink coffee', why: 'Put the frequency adverb before the main verb.' },
+      { wrong: 'she never is late', right: 'she is never late', why: 'With "be", the adverb comes after it.' },
+    ],
+    triggerWords: ['always', 'usually', 'often', 'sometimes', 'never'],
+    prerequisites: ['present_simple_basic', 'be'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'present_simple_questions',
+    label: 'Present Simple Questions (do / does)',
+    cefr: 'A1.2',
+    explanation: 'Use "do" with I/you/we/they and "does" with he/she/it. After do/does, the main verb stays in its base form.',
+    examples: ['Do you work here?', 'Does she live in Paris?', 'What time do you wake up?'],
+    commonMistakes: [
+      { wrong: 'does she works', right: 'does she work', why: 'After "does", the verb has no -s.' },
+      { wrong: 'you work here?', right: 'do you work here?', why: 'Start the question with do/does.' },
+    ],
+    triggerWords: [],
+    prerequisites: ['basic_questions', 'present_simple_third_person'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'prepositions_time',
+    label: 'Prepositions of Time: at / on / in',
+    cefr: 'A1.2',
+    explanation: '"at" for clock times (at 7), "on" for days and dates (on Monday), "in" for parts of the day, months and years (in the morning, in May).',
+    examples: ['I wake up at six.', 'The meeting is on Monday.', 'I study in the evening.'],
+    commonMistakes: [
+      { wrong: 'on the morning', right: 'in the morning', why: 'Parts of the day use "in" (except "at night").' },
+      { wrong: 'in monday', right: 'on monday', why: 'Days of the week use "on".' },
+    ],
+    triggerWords: [],
+    prerequisites: [],
+    masteryThreshold: 65,
+  },
+  {
+    id: 'prepositions_place',
+    label: 'Prepositions of Place: in / on / at',
+    cefr: 'A1.2',
+    explanation: '"in" for enclosed spaces and cities (in Paris, in the office), "on" for surfaces (on the table), "at" for a point or usual place (at home, at work).',
+    examples: ['She lives in Paris.', 'The keys are on the table.', 'I am at home.'],
+    commonMistakes: [
+      { wrong: 'i am in home', right: 'i am at home', why: '"at home" is a fixed expression.' },
+    ],
+    triggerWords: [],
+    prerequisites: ['be'],
+    masteryThreshold: 65,
+  },
+  {
+    id: 'adverbs_manner',
+    label: 'Adverbs of Manner (-ly, well)',
+    cefr: 'A1.2',
+    explanation: 'Adverbs describe HOW you do something. Most add -ly to the adjective (slow → slowly). "good" becomes "well"; "fast" and "hard" stay the same.',
+    examples: ['She speaks slowly.', 'He speaks English well.', 'They work hard.'],
+    commonMistakes: [
+      { wrong: 'he speaks good', right: 'he speaks well', why: '"good" is an adjective; the adverb is "well".' },
+    ],
+    triggerWords: [],
+    prerequisites: ['present_simple_third_person'],
+    masteryThreshold: 65,
+  },
+]

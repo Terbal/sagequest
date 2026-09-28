@@ -6,8 +6,7 @@ A speaking-first English training PWA. Not a chatbot, not a flashcard app, not a
 AI tutor — a deterministic, rule-based system that drills grammar reflexes, verb
 mastery, and spoken production through a structured 90-day program.
 
-This build implements **Days 1–7** (Week 1 — Survival English, ending in the Day 7
-Boss) end to end, on an architecture designed to scale to the full 90 days without
+This build implements **Days 1–14** (Week 1 — Survival English and Week 2 — Daily Life, each ending in a Boss) end to end, on an architecture designed to scale to the full 90 days without
 touching the engine — see `PHASES.md` for what's built and what's next.
 
 ## Stack

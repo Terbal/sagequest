@@ -14,7 +14,7 @@ export const week1Exercises: Exercise[] = [
   },
   {
     id: 'd1-ex3', type: 'transformation', grammar: ['be', 'pronouns'], cefr: 'A1.1',
-    prompt: 'Transform: they / tired', expectedPatterns: ['word:they', 'word:are', 'word:tired'],
+    prompt: 'Build a sentence with: they / tired', expectedPatterns: ['word:they', 'word:are', 'word:tired'],
     acceptableAnswers: ['they are tired'],
     hint: 'they + are + adjective',
   },
@@ -45,7 +45,7 @@ export const week1Exercises: Exercise[] = [
   },
   {
     id: 'd2-ex3', type: 'transformation', grammar: ['possessives'], cefr: 'A1.1',
-    prompt: 'Transform: Anna / name (make it a sentence with a possessive)',
+    prompt: 'Build a sentence with: Anna / name (use a possessive)',
     expectedPatterns: ['word:her', 'word:name'],
     acceptableAnswers: ['her name is anna'],
     hint: 'Her name is...',
@@ -109,7 +109,7 @@ export const week1Exercises: Exercise[] = [
   },
   {
     id: 'd4-ex3', type: 'transformation', grammar: ['there_is_are'], cefr: 'A1.1',
-    prompt: 'Transform: three chairs / room (use "there are")',
+    prompt: 'Build a sentence with: three chairs / room (use "there are")',
     expectedPatterns: ['word:there', 'word:are', 'word:chairs'],
     acceptableAnswers: ['there are three chairs in the room', 'there are three chairs'],
   },
@@ -199,7 +199,14 @@ export const day7Boss: Exercise[] = [
     id: 'd7-boss1', type: 'speaking', grammar: ['be', 'have', 'present_simple_basic', 'basic_negatives'],
     cefr: 'A1.2',
     prompt: 'Introduce yourself for 60 seconds: your name, where you are from, your job, your family, and something you like.',
-    expectedPatterns: ['word:am'],
+    // 5 required elements; 80% threshold => at least 4 of 5 must be present.
+    expectedPatterns: [
+      'regex:\\b(my name is|i am|i\'m)\\b',
+      'regex:\\bfrom\\b',
+      'regex:\\b(work|job|developer|engineer|student|teacher)\\b',
+      'regex:\\b(family|brother|sister|mother|father|wife|husband|children|child)\\b',
+      'regex:\\b(like|love|enjoy)\\b',
+    ],
     timeLimitSeconds: 60,
   },
 ]

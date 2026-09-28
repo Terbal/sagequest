@@ -56,3 +56,51 @@ export const week1UsageNotes: UsageNote[] = [
     examplesBad: ['She name is Anna.'],
   },
 ]
+
+export const week2UsageNotes: UsageNote[] = [
+  {
+    id: 'un-s-es-ies',
+    title: '-s, -es or -ies with he / she / it?',
+    cefr: 'A1.2',
+    relatedGrammar: ['present_simple_third_person'],
+    explanation: 'Most verbs just add -s (works). Verbs ending in s, sh, ch, x or o add -es (watches, finishes, goes). Consonant + y becomes -ies (study → studies), but vowel + y just adds -s (play → plays).',
+    examplesGood: ['She works.', 'He watches TV.', 'It goes fast.', 'She studies.', 'He plays.'],
+    examplesBad: ['He watchs TV.', 'She studys.'],
+  },
+  {
+    id: 'un-frequency-position',
+    title: 'Where does "always" go?',
+    cefr: 'A1.2',
+    relatedGrammar: ['frequency_adverbs'],
+    explanation: 'Before the main verb ("I always drink tea") but after "be" ("She is always happy"). French speakers often put it at the end, which sounds wrong in English.',
+    examplesGood: ['I always drink tea.', 'She is always happy.', 'They never work on Sunday.'],
+    examplesBad: ['I drink always tea.', 'She always is happy.'],
+  },
+  {
+    id: 'un-at-on-in-time',
+    title: 'at / on / in for time',
+    cefr: 'A1.2',
+    relatedGrammar: ['prepositions_time'],
+    explanation: 'Think of it as precise → general: "at" for exact clock times (at 7:30, at noon, at night), "on" for days and dates (on Monday, on May 3rd), "in" for longer periods (in the morning, in July, in 2026).',
+    examplesGood: ['at 7:30', 'on Monday', 'in the morning', 'in July', 'at night'],
+    examplesBad: ['on 7:30', 'in Monday', 'at the morning'],
+  },
+  {
+    id: 'un-at-home-work',
+    title: '"at home", "at work" — fixed expressions',
+    cefr: 'A1.2',
+    relatedGrammar: ['prepositions_place'],
+    explanation: 'Usual places use "at" without an article: at home, at work, at school. After motion verbs, "home" takes no preposition at all: "I go home", not "I go to home".',
+    examplesGood: ['I am at home.', 'She is at work.', 'I go home at six.'],
+    examplesBad: ['I am in home.', 'I go to home.'],
+  },
+  {
+    id: 'un-good-well',
+    title: '"good" vs "well"',
+    cefr: 'A1.2',
+    relatedGrammar: ['adverbs_manner'],
+    explanation: '"good" describes a noun (a good teacher). "well" describes an action (she teaches well). In French both are "bien", which is why this one is so easy to mix up.',
+    examplesGood: ['She is a good driver.', 'She drives well.', 'He speaks English well.'],
+    examplesBad: ['She drives good.', 'He speaks English good.'],
+  },
+]

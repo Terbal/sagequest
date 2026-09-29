@@ -170,3 +170,72 @@ export const week3UsageNotes: UsageNote[] = [
     examplesBad: ['ago two days', 'since two days', 'the last week (for a finished week)'],
   },
 ]
+
+export const week4UsageNotes: UsageNote[] = [
+  {
+    id: 'un-continuous-vs-simple',
+    title: 'Background vs. event: continuous vs. simple',
+    cefr: 'A2.2',
+    relatedGrammar: ['when_interrupted_action', 'storytelling_mixed'],
+    explanation: 'The past continuous paints the scene (what was already going on); the past simple is the event that happens inside that scene. "I was walking (scene) when I saw him (event)" — not the other way round.',
+    examplesGood: ['I was walking when I saw him.', 'It was raining when we left.'],
+    examplesBad: ['I walked when I was seeing him.'],
+  },
+  {
+    id: 'un-when-vs-while',
+    title: '"when" vs "while"',
+    cefr: 'A2.2',
+    relatedGrammar: ['when_interrupted_action', 'while_parallel_actions'],
+    explanation: '"when" introduces the short interrupting event (+ past simple). "while" introduces a second action happening at the same time as another (+ past continuous on both sides, usually).',
+    examplesGood: ['I was cooking when she arrived.', 'While I was cooking, she was setting the table.'],
+    examplesBad: ['While she arrived, I was cooking.'],
+  },
+  {
+    id: 'un-not-was-ing-alone',
+    title: 'The past continuous always needs was/were',
+    cefr: 'A2.2',
+    relatedGrammar: ['past_continuous'],
+    explanation: 'French "en train de" sometimes gets dropped in fast speech, but in English the -ing form can never stand alone as a full verb: "I working" is not a sentence. You always need was/were (or am/is/are in the present).',
+    examplesGood: ['I was working.', 'She is working.'],
+    examplesBad: ['I working.', 'She working.'],
+  },
+]
+
+export const week5UsageNotes: UsageNote[] = [
+  {
+    id: 'un-will-vs-goingto',
+    title: 'Already decided vs. deciding now',
+    cefr: 'A2.3',
+    relatedGrammar: ['will_vs_going_to'],
+    explanation: 'If the plan exists before you speak (a booking, an arrangement), use "going to". If you are deciding at the exact moment you speak (an offer, a spontaneous choice, a reaction), use "will".',
+    examplesGood: ["I'm going to visit my parents next week. (already planned)", "The phone's ringing — I'll get it. (deciding now)"],
+    examplesBad: ["I'll visit my parents next week, it's already booked."],
+  },
+  {
+    id: 'un-no-to-after-modal',
+    title: 'No "to" after will / might / should',
+    cefr: 'A2.3',
+    relatedGrammar: ['future_will', 'modals_possibility', 'modals_advice'],
+    explanation: 'will, might, may, should, must, can, could — none of them are ever followed by "to". They go straight to the base verb: "I will go", not "I will to go".',
+    examplesGood: ['I will go.', 'I might come.', 'You should rest.'],
+    examplesBad: ['I will to go.', 'I might to come.', 'You should to rest.'],
+  },
+  {
+    id: 'un-should-vs-must',
+    title: '"should" (advice) vs "must" (obligation)',
+    cefr: 'A2.3',
+    relatedGrammar: ['modals_advice'],
+    explanation: '"should" is a friendly suggestion — the person can choose to ignore it. "must" is a strong obligation or rule. Mixing them up can sound much more forceful than you mean.',
+    examplesGood: ['You should try this restaurant. (suggestion)', 'You must wear a seatbelt. (rule)'],
+    examplesBad: ['You must try this restaurant. (too strong for a friendly tip)'],
+  },
+  {
+    id: 'un-present-continuous-future',
+    title: 'Present continuous ≠ present action, here',
+    cefr: 'A2.3',
+    relatedGrammar: ['present_continuous_future'],
+    explanation: 'With a future time word (tomorrow, on Monday, next week), "I\'m meeting him" is NOT happening right now — it describes a fixed future arrangement. Context (the time word) tells you it\'s the future, not the grammar form itself.',
+    examplesGood: ["I'm meeting a client tomorrow.", "We're flying to Paris on Monday."],
+    examplesBad: [],
+  },
+]

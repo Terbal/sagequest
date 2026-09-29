@@ -14,7 +14,7 @@ Per the master spec's development strategy (phased build, verify after each phas
 | 8 | Placement Test | ✅ Done |
 | 9 | Boss system | ✅ Done (Day 7 boss; weekly boss pattern established) |
 | 10 | Offline/PWA | ✅ Done (service worker, manifest, IndexedDB) — not yet tested on a real device |
-| 11 | Content expansion (Days 8–90) | 🟡 Days 1–21 done (Weeks 1–3 + 3 bosses); Days 22–90 not started |
+| 11 | Content expansion (Days 8–90) | 🟡 Days 1–35 done (Weeks 1–5 + 5 bosses); Days 36–90 not started |
 | 12 | QA + polish | 🟡 Build/typecheck/lint clean; no in-browser manual QA pass yet |
 
 ## Verified this session

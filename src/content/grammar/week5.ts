@@ -1,0 +1,85 @@
+import type { GrammarConcept } from '../../core/types'
+
+export const week5Grammar: GrammarConcept[] = [
+  {
+    id: 'future_will',
+    label: '"will" — predictions, decisions, promises',
+    cefr: 'A2.3',
+    explanation: 'will + base verb for: predictions with no evidence ("I think it will rain"), decisions made right now ("I\'ll answer that"), promises and offers ("I\'ll help you"). Contraction: I\'ll, you\'ll, she\'ll...',
+    examples: ['I think it will rain tomorrow.', "I'll call you back.", "I'll help you with that."],
+    commonMistakes: [
+      { wrong: 'i will to call', right: 'i will call', why: 'No "to" after will — will + base verb.' },
+      { wrong: 'i going to answer the phone', right: "i'll answer the phone", why: 'A decision made at the moment of speaking uses "will", not "going to".' },
+    ],
+    triggerWords: ['I think', 'probably', "I'll", 'tomorrow'],
+    prerequisites: ['present_simple_basic'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'future_going_to',
+    label: '"going to" — plans & evidence-based predictions',
+    cefr: 'A2.3',
+    explanation: 'be going to + base verb for: plans decided before now ("I\'m going to visit my parents next week") and predictions based on something you can see now ("Look at those clouds — it\'s going to rain").',
+    examples: ["I'm going to start a new job next month.", "Look out — you're going to fall!"],
+    commonMistakes: [
+      { wrong: 'i go to visit my parents', right: "i'm going to visit my parents", why: 'Need "be" + going to, not just "go to".' },
+    ],
+    triggerWords: ['next week', 'next month', 'next year'],
+    prerequisites: ['be', 'present_simple_basic'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'will_vs_going_to',
+    label: '"will" vs "going to"',
+    cefr: 'A2.3',
+    explanation: 'Already decided, with a plan = going to. Decided right now, or a guess with no real evidence = will. "I\'m going to quit my job" (planned) vs "I\'ll think about it" (deciding now).',
+    examples: ["I'm going to travel this summer. (already planned)", "OK, I'll come with you. (deciding now)"],
+    commonMistakes: [
+      { wrong: "i'll travel this summer, it's already booked", right: "i'm going to travel this summer, it's already booked", why: 'An already-booked plan uses "going to", not "will".' },
+    ],
+    triggerWords: [],
+    prerequisites: ['future_will', 'future_going_to'],
+    masteryThreshold: 70,
+  },
+  {
+    id: 'present_continuous_future',
+    label: 'Present Continuous for fixed arrangements',
+    cefr: 'A2.3',
+    explanation: 'am/is/are + verb-ing for a future event that is already arranged with a specific time or place, usually with someone else: "I\'m meeting him at 6" (it\'s in the calendar).',
+    examples: ["I'm meeting a client tomorrow.", "We're having dinner at 8.", "She's flying to Paris on Monday."],
+    commonMistakes: [
+      { wrong: 'i meet him tomorrow at 6', right: "i'm meeting him tomorrow at 6", why: 'A fixed, arranged future event needs the present continuous, not the present simple.' },
+    ],
+    triggerWords: ['tomorrow', 'next week', 'on Monday', 'at 6'],
+    prerequisites: ['present_simple_third_person'],
+    masteryThreshold: 65,
+  },
+  {
+    id: 'modals_possibility',
+    label: '"may" / "might" — possibility',
+    cefr: 'A2.3',
+    explanation: 'may/might + base verb = it\'s possible, but not certain. Both work the same way; "might" is slightly less certain in everyday use. Never add "to" or "-s".',
+    examples: ['I might come to the party.', 'It may rain later.', "She might not be ready."],
+    commonMistakes: [
+      { wrong: 'i might to come', right: 'i might come', why: 'No "to" after may/might.' },
+      { wrong: 'she mights come', right: 'she might come', why: 'Modals never take -s, even with he/she/it.' },
+    ],
+    triggerWords: ['maybe', 'perhaps', 'possibly'],
+    prerequisites: ['future_will'],
+    masteryThreshold: 65,
+  },
+  {
+    id: 'modals_advice',
+    label: '"should" — advice & suggestions',
+    cefr: 'A2.3',
+    explanation: 'should + base verb to give advice or say what is a good idea. "You should rest" = it\'s a good idea for you to rest — not an order.',
+    examples: ['You should see a doctor.', 'We should leave now.', "You shouldn't work so hard."],
+    commonMistakes: [
+      { wrong: 'you should to rest', right: 'you should rest', why: 'No "to" after should.' },
+      { wrong: 'you must see a doctor', right: 'you should see a doctor', why: '"must" is a strong obligation; "should" is gentler advice.' },
+    ],
+    triggerWords: [],
+    prerequisites: ['future_will'],
+    masteryThreshold: 65,
+  },
+]

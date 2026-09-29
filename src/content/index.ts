@@ -1,29 +1,39 @@
 import { week1Grammar } from './grammar/week1'
 import { week2Grammar } from './grammar/week2'
 import { week3Grammar } from './grammar/week3'
+import { week4Grammar } from './grammar/week4'
+import { week5Grammar } from './grammar/week5'
 import { coreVerbs } from './verbs/core'
 import { week1Vocab } from './vocabulary/week1'
 import { week2Vocab } from './vocabulary/week2'
 import { week3Vocab } from './vocabulary/week3'
+import { week4Vocab } from './vocabulary/week4'
+import { week5Vocab } from './vocabulary/week5'
 import { week3Verbs } from './verbs/week3'
+import { week4Verbs } from './verbs/week4'
+import { week5Verbs } from './verbs/week5'
 import { week2Verbs } from './verbs/week2'
 import { week1Exercises, day7Boss } from './missions/exercisesWeek1'
 import { week2Exercises, day14Boss } from './missions/exercisesWeek2'
 import { week3Exercises, day21Boss } from './missions/exercisesWeek3'
+import { week4Exercises, day28Boss } from './missions/exercisesWeek4'
+import { week5Exercises, day35Boss } from './missions/exercisesWeek5'
 import { week1Missions, day7BossMission } from './missions/week1'
 import { week2Missions, day14BossMission } from './missions/week2'
 import { week3Missions, day21BossMission } from './missions/week3'
-import { week1UsageNotes, week2UsageNotes, week3UsageNotes } from './usageNotes'
-import { week1Idioms, week2Idioms, week3Idioms } from './idioms/week1'
+import { week4Missions, day28BossMission } from './missions/week4'
+import { week5Missions, day35BossMission } from './missions/week5'
+import { week1UsageNotes, week2UsageNotes, week3UsageNotes, week4UsageNotes, week5UsageNotes } from './usageNotes'
+import { week1Idioms, week2Idioms, week3Idioms, week4Idioms, week5Idioms } from './idioms/week1'
 import type { Exercise, GrammarConcept, Mission, VerbEntry, VocabItem, UsageNote, IdiomScenario } from '../core/types'
 
-export const allGrammar: GrammarConcept[] = [...week1Grammar, ...week2Grammar, ...week3Grammar]
-export const allVerbs: VerbEntry[] = [...coreVerbs, ...week2Verbs, ...week3Verbs]
-export const allVocab: VocabItem[] = [...week1Vocab, ...week2Vocab, ...week3Vocab]
-export const allExercises: Exercise[] = [...week1Exercises, ...day7Boss, ...week2Exercises, ...day14Boss, ...week3Exercises, ...day21Boss]
-export const allMissions: Mission[] = [...week1Missions, day7BossMission, ...week2Missions, day14BossMission, ...week3Missions, day21BossMission]
-export const allUsageNotes: UsageNote[] = [...week1UsageNotes, ...week2UsageNotes, ...week3UsageNotes]
-export const allIdioms: IdiomScenario[] = [...week1Idioms, ...week2Idioms, ...week3Idioms]
+export const allGrammar: GrammarConcept[] = [...week1Grammar, ...week2Grammar, ...week3Grammar, ...week4Grammar, ...week5Grammar]
+export const allVerbs: VerbEntry[] = [...coreVerbs, ...week2Verbs, ...week3Verbs, ...week4Verbs, ...week5Verbs]
+export const allVocab: VocabItem[] = [...week1Vocab, ...week2Vocab, ...week3Vocab, ...week4Vocab, ...week5Vocab]
+export const allExercises: Exercise[] = [...week1Exercises, ...day7Boss, ...week2Exercises, ...day14Boss, ...week3Exercises, ...day21Boss, ...week4Exercises, ...day28Boss, ...week5Exercises, ...day35Boss]
+export const allMissions: Mission[] = [...week1Missions, day7BossMission, ...week2Missions, day14BossMission, ...week3Missions, day21BossMission, ...week4Missions, day28BossMission, ...week5Missions, day35BossMission]
+export const allUsageNotes: UsageNote[] = [...week1UsageNotes, ...week2UsageNotes, ...week3UsageNotes, ...week4UsageNotes, ...week5UsageNotes]
+export const allIdioms: IdiomScenario[] = [...week1Idioms, ...week2Idioms, ...week3Idioms, ...week4Idioms, ...week5Idioms]
 
 export function getMissionByDay(day: number): Mission | undefined {
   return allMissions.find((m) => m.day === day)
@@ -45,4 +55,4 @@ export function getVocabById(id: string): VocabItem | undefined {
   return allVocab.find((v) => v.id === id)
 }
 
-export const TOTAL_CONTENT_DAYS = 21 // grows as content expands, engine already supports 1-90.
+export const TOTAL_CONTENT_DAYS = 35 // grows as content expands, engine already supports 1-90.

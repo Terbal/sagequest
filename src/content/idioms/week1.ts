@@ -128,3 +128,57 @@ export const week3Idioms: IdiomScenario[] = [
     prompt: 'Start a short story about yesterday with "Guess what happened!".',
   },
 ]
+
+export const week4Idioms: IdiomScenario[] = [
+  {
+    id: 'id-out-of-nowhere',
+    situation: 'Something happened completely unexpectedly, with no warning.',
+    expression: 'Out of nowhere...',
+    meaningFr: "Sorti de nulle part / sans prévenir.",
+    cefr: 'A2.2',
+    prompt: 'Start a short story about something surprising with "Out of nowhere...".',
+  },
+  {
+    id: 'id-next-thing-i-knew',
+    situation: "You're telling a story about a sudden turn of events.",
+    expression: 'The next thing I knew...',
+    meaningFr: "Et là, tout à coup...",
+    cefr: 'A2.2',
+    prompt: 'Continue a story using "The next thing I knew...".',
+  },
+  {
+    id: 'id-you-wont-believe',
+    situation: "You're about to tell a friend something surprising that happened.",
+    expression: "You won't believe what happened.",
+    meaningFr: "Tu ne vas pas croire ce qui s'est passé.",
+    cefr: 'A2.2',
+    prompt: 'Introduce a surprising story to a friend.',
+  },
+]
+
+export const week5Idioms: IdiomScenario[] = [
+  {
+    id: 'id-play-it-by-ear',
+    situation: "Someone asks about your exact plans, but you don't want to fix every detail yet.",
+    expression: "I'll play it by ear.",
+    meaningFr: "Je vais improviser / voir sur le moment.",
+    cefr: 'A2.3',
+    prompt: 'Answer "What are you doing this weekend?" without a fixed plan, using "play it by ear".',
+  },
+  {
+    id: 'id-see-how-it-goes',
+    situation: "You're starting something new and not sure how it will turn out.",
+    expression: "We'll see how it goes.",
+    meaningFr: "On verra bien comment ça se passe.",
+    cefr: 'A2.3',
+    prompt: 'Talk about a new plan and end with "We\'ll see how it goes."',
+  },
+  {
+    id: 'id-fingers-crossed',
+    situation: "You're hoping for good news about a job interview.",
+    expression: "Fingers crossed!",
+    meaningFr: "Croisons les doigts !",
+    cefr: 'A2.3',
+    prompt: 'Talk about something you hope will happen, and add "Fingers crossed!"',
+  },
+]

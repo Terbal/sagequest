@@ -67,6 +67,29 @@ const good: Record<string, string> = {
   'd19-reflex1': "I didn't eat yesterday", 'd19-reflex2': "She didn't call", 'd19-speak1': "I didn't go to work and I didn't cook.",
   'd20-reflex1': 'What did you do yesterday', 'd20-reflex2': 'Did he call the client', 'd20-speak1': 'Did you go to the party? What did you do?',
   'd21-boss1': "Yesterday I went to the office. I worked all morning and then I met a client. I didn't have lunch.",
+  'd22-reflex1': 'I was working at nine pm', 'd22-reflex2': 'It was raining', 'd22-speak1': 'I was sleeping at 8pm yesterday. I was working at noon today.',
+  'd23-reflex1': 'What were you doing at noon', 'd23-reflex2': "I wasn't listening", 'd23-speak1': 'What were you doing yesterday morning? What were you doing at noon?',
+  'd24-reflex1': 'I was working when he called', 'd24-reflex2': 'She was cooking when the phone rang',
+  'd24-speak1': 'I was walking home when it started to rain.',
+  'd25-reflex1': 'While I was cooking, she was reading', 'd25-reflex2': 'While I was driving, he was sleeping',
+  'd25-speak1': 'While I was working, my brother was watching TV.',
+  'd26-reflex1': 'Suddenly the phone rang', 'd26-reflex2': 'Finally I found my keys',
+  'd26-speak1': 'First I woke up. Then I had breakfast. Finally I left home.',
+  'd27-reflex1': 'I was walking when I saw an accident', 'd27-reflex2': 'It was raining when we left',
+  'd27-speak1': 'It was raining and I was walking home when I saw an old friend.',
+  'd28-boss1': 'It was raining and I was walking home when I saw an accident. Suddenly a car stopped. First I called for help, then I waited.',
+  'd29-reflex1': 'I think it will rain', 'd29-reflex2': "I'll help you", 'd29-speak1': "I think it will be sunny. I'll call you tomorrow.",
+  'd30-reflex1': "I'm going to start a new job next month", 'd30-reflex2': "We're going to move next year",
+  'd30-speak1': "I'm going to visit my family next month.",
+  'd31-reflex1': "I'm going to travel this summer", 'd31-reflex2': "OK, I'll think about it",
+  'd31-speak1': "I'm going to change jobs next year. OK, I'll come with you.",
+  'd32-reflex1': "I'm meeting a client tomorrow", 'd32-reflex2': "We're having dinner at 8",
+  'd32-speak1': "I'm meeting my team tomorrow at 9.",
+  'd33-reflex1': 'I might come to the party', 'd33-reflex2': 'She might not be ready',
+  'd33-speak1': 'I might travel this weekend. It may rain too.',
+  'd34-reflex1': 'You should see a doctor', 'd34-reflex2': 'We should leave now',
+  'd34-speak1': "You should rest more. You shouldn't work so hard.",
+  'd35-boss1': "I'm going to change my career next year. I'll also try to travel more. I might start a new hobby soon.",
 }
 for (const [id, text] of Object.entries(good)) {
   const r = run(id, text)
@@ -84,6 +107,13 @@ const wrong: [string, string][] = [
   ['d19-ex3', "i didn't went to the party"], ['d20-ex3', 'did you saw the movie'], ['d17-reflex1', 'Yesterday I go to the office'],
   ['d19-reflex1', 'I not eat yesterday'], ['d20-reflex1', 'What you did yesterday'],
   ['d14-boss1', 'I like football'], ['d7-boss1', 'Hello'], ['d21-boss1', 'I am fine'],
+  ['d22-ex1', 'i work at 9pm'], ['d23-ex3', 'did you were sleeping'], ['d24-ex3', 'we slept when the alarm was going off'],
+  ['d25-ex3', 'while i worked she studied'], ['d27-ex3', 'i drove when i was seeing the accident'],
+  ['d22-reflex1', 'I working at nine pm'], ['d28-boss1', 'Nothing happened.'],
+  ['d29-ex2', 'OK, I am going to help you'], ['d30-ex1', 'I will going to start a new job next month'],
+  ['d31-ex1', "It's already booked, I will travel this summer"], ['d32-ex1', 'I meet a client tomorrow'],
+  ['d33-ex1', 'I mights come to the party'], ['d34-ex1', 'You should to see a doctor'],
+  ['d34-ex3', "you must not work so hard"], ['d35-boss1', 'I have no plans.'],
 ]
 for (const [id, text] of wrong) {
   const r = run(id, text)

@@ -3,12 +3,19 @@ import { useAppStore } from '../lib/store'
 
 export default function Onboarding() {
   const [name, setName] = useState('')
+  const [touched, setTouched] = useState(false)
   const createProfile = useAppStore((s) => s.createProfile)
   const [starting, setStarting] = useState(false)
 
+  const trimmed = name.trim()
+  const isValid = trimmed.length >= 2
+  const showError = touched && !isValid
+
   async function handleStart() {
+    setTouched(true)
+    if (!isValid) return
     setStarting(true)
-    await createProfile(name.trim() || 'Learner')
+    await createProfile(trimmed)
   }
 
   return (
@@ -27,20 +34,31 @@ export default function Onboarding() {
         </p>
 
         <label className="block text-xs font-medium mb-2" style={{ color: 'var(--sq-text-muted)' }}>
-          What should we call you?
+          What should we call you? <span style={{ color: 'var(--sq-error)' }}>*</span>
         </label>
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onBlur={() => setTouched(true)}
           placeholder="Your name"
-          className="w-full px-4 py-3 mb-6 sq-panel text-sm outline-none"
-          style={{ color: 'var(--sq-text)' }}
+          autoFocus
+          aria-required="true"
+          aria-invalid={showError}
+          className="w-full px-4 py-3 sq-panel text-sm outline-none"
+          style={{ color: 'var(--sq-text)', borderColor: showError ? 'var(--sq-error)' : undefined }}
           onKeyDown={(e) => e.key === 'Enter' && handleStart()}
         />
+        <div className="min-h-[1.25rem] mb-4 mt-1.5">
+          {showError && (
+            <p className="text-xs" style={{ color: 'var(--sq-error)' }}>
+              {trimmed.length === 0 ? 'Enter a name to continue — even a nickname is fine.' : 'Please use at least 2 characters.'}
+            </p>
+          )}
+        </div>
 
         <button
           onClick={handleStart}
-          disabled={starting}
+          disabled={starting || (touched && !isValid)}
           className="w-full py-3 font-semibold text-sm rounded-[var(--sq-radius-sm)] transition-opacity disabled:opacity-60"
           style={{ background: 'var(--sq-accent)', color: 'var(--sq-accent-text)' }}
         >
